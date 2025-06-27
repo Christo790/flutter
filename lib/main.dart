@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
                 Expanded(
                   child: TextButton(
                     onPressed: () {
-                      playAudio('https://raw.githubusercontent.com/Christo790/flutter/main/audio/a.wav');
+                      playAudio('audio/a.wav');
                     },
                     child: Text(' '),
                     style: TextButton.styleFrom(
@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
                 Expanded(
                   child: TextButton(
                     onPressed: () {
-                      playAudio('https://raw.githubusercontent.com/Christo790/flutter/main/audio/b.wav');
+                      playAudio('audio/b.wav');
                     },
                     child: Text(' '),
                     style: TextButton.styleFrom(
@@ -49,7 +49,7 @@ class MyApp extends StatelessWidget {
                 Expanded(
                   child: TextButton(
                     onPressed: () {
-                      playAudio('https://raw.githubusercontent.com/Christo790/flutter/main/audio/c.wav');
+                      playAudio('audio/c.wav');
                     },
                     child: Text(' '),
                     style: TextButton.styleFrom(
@@ -63,7 +63,7 @@ class MyApp extends StatelessWidget {
                 Expanded(
                   child: TextButton(
                     onPressed: () {
-                      playAudio('https://raw.githubusercontent.com/Christo790/flutter/main/audio/d.wav');
+                      playAudio('audio/d.wav');
                     },
                     child: Text(' '),
                     style: TextButton.styleFrom(
@@ -77,7 +77,7 @@ class MyApp extends StatelessWidget {
                 Expanded(
                   child: TextButton(
                     onPressed: () {
-                      playAudio('https://raw.githubusercontent.com/Christo790/flutter/main/audio/f.wav');
+                      playAudio('audio/f.wav');
                     },
                     child: Text(' '),
                     style: TextButton.styleFrom(
@@ -91,7 +91,7 @@ class MyApp extends StatelessWidget {
                 Expanded(
                   child: TextButton(
                     onPressed: () {
-                      playAudio('https://raw.githubusercontent.com/Christo790/flutter/main/audio/g.wav');
+                      playAudio('audio/g.wav');
                     },
                     child: Text(' '),
                     style: TextButton.styleFrom(
@@ -110,11 +110,11 @@ class MyApp extends StatelessWidget {
     );
   }
 
-  // Function to play audio from URL using a new AudioPlayer each time
-  static Future<void> playAudio(String url) async {
+  // Function to play audio from assets
+  static Future<void> playAudio(String assetPath) async {
     final player = AudioPlayer();
     try {
-      await player.setUrl(url);
+      await player.setAsset(assetPath);
       await player.play();
     } catch (e) {
       print('Error playing audio: $e');
