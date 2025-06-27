@@ -13,72 +13,113 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         backgroundColor: Colors.black,
-        body: SafeArea(child: AudioButtonColumn()),
+        body: SafeArea(
+          child: Container(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Expanded(
+                  child: TextButton(
+                    onPressed: () {
+                      playAudio('https://raw.githubusercontent.com/Christo790/flutter/main/audio/a.wav');
+                    },
+                    child: Text(' '),
+                    style: TextButton.styleFrom(
+                      backgroundColor: Colors.red,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: TextButton(
+                    onPressed: () {
+                      playAudio('https://raw.githubusercontent.com/Christo790/flutter/main/audio/b.wav');
+                    },
+                    child: Text(' '),
+                    style: TextButton.styleFrom(
+                      backgroundColor: Colors.orange,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: TextButton(
+                    onPressed: () {
+                      playAudio('https://raw.githubusercontent.com/Christo790/flutter/main/audio/c.wav');
+                    },
+                    child: Text(' '),
+                    style: TextButton.styleFrom(
+                      backgroundColor: Colors.yellow,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: TextButton(
+                    onPressed: () {
+                      playAudio('https://raw.githubusercontent.com/Christo790/flutter/main/audio/d.wav');
+                    },
+                    child: Text(' '),
+                    style: TextButton.styleFrom(
+                      backgroundColor: Colors.green.shade400,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: TextButton(
+                    onPressed: () {
+                      playAudio('https://raw.githubusercontent.com/Christo790/flutter/main/audio/f.wav');
+                    },
+                    child: Text(' '),
+                    style: TextButton.styleFrom(
+                      backgroundColor: Colors.blue,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: TextButton(
+                    onPressed: () {
+                      playAudio('https://raw.githubusercontent.com/Christo790/flutter/main/audio/g.wav');
+                    },
+                    child: Text(' '),
+                    style: TextButton.styleFrom(
+                      backgroundColor: Colors.purple.shade800,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
-}
 
-class AudioButtonColumn extends StatefulWidget {
-  @override
-  _AudioButtonColumnState createState() => _AudioButtonColumnState();
-}
-
-class _AudioButtonColumnState extends State<AudioButtonColumn> {
-  final AudioPlayer _player = AudioPlayer();
-
-  // List of audio URLs
-  final List<String> _audioUrls = [
-    'https://s3.amazonaws.com/scifri-episodes/scifri20181123-episode.mp3',
-    'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
-    'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3',
-    'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3',
-    'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3',
-    'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3',
-  ];
-
-  Future<void> _playAudio(String url) async {
+  // Function to play audio from URL using a new AudioPlayer each time
+  static Future<void> playAudio(String url) async {
+    final player = AudioPlayer();
     try {
-      await _player.setUrl(url);
-      await _player.play();
+      await player.setUrl(url);
+      await player.play();
     } catch (e) {
       print('Error playing audio: $e');
+    } finally {
+      await player.dispose();
     }
-  }
-
-  @override
-  void dispose() {
-    _player.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final colors = [
-      Colors.red,
-      Colors.orange,
-      Colors.yellow,
-      Colors.green.shade400,
-      Colors.blue,
-      Colors.purple.shade800,
-    ];
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: List.generate(6, (index) {
-        return Expanded(
-          child: TextButton(
-            onPressed: () => _playAudio(_audioUrls[index]),
-            style: TextButton.styleFrom(
-              backgroundColor: colors[index],
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(4),
-              ),
-            ),
-            child: const Text(' ', style: TextStyle(color: Colors.white)),
-          ),
-        );
-      }),
-    );
   }
 }
